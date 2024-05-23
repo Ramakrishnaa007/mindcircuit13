@@ -4,22 +4,20 @@ pipeline {
     stages {
         stage('CLONE SCM') {
             steps {
-                echo 'Cloning Mc-app project code'
+                echo 'Code clone from github repository'
 				git branch: 'main', url: 'https://github.com/Ramakrishnaa007/mindcircuit13.git'
             }
         }
-		
-		stage('Build Artifact ') {
+		stage('BUILD ARTIFACT') {
             steps {
-                echo 'generating artifact with maven build tool'
-				sh 'mvn clean install'
+                echo 'Generating artifact by maven build tool'
+                sh 'mvn clean install'				
             }
         }
-		
-		stage('Deploy to tomcat') {
+		stage('DEPLOY TO TOMCAT') {
             steps {
-                echo 'Deploying artifact to tomcat webserver '
-				deploy adapters: [tomcat9(credentialsId: 'tomcat', path: '', url: 'http://100.26.252.72:8081/')], contextPath: 'facebook-app', war: '**/*.war'
+                echo 'Code deployment to tomcat'
+				deploy adapters: [tomcat9(credentialsId: 'tomcat-credentials', path: '', url: 'http://100.26.252.72:8081/')], contextPath: 'facebook-app', war: '**/*.war'
             }
         }
     }
