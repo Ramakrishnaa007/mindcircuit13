@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
+    <meta charset="UTF-9">
     <meta http-equiv="X-UA-Compatible" 
           content="IE=edge">
     <meta name="viewport" 
@@ -91,7 +91,7 @@
 
             <!-- Input Type Text -->
             <input type="text" id="name" 
-                   placeholder="Enter your name" />
+                   placeholder="Please enter your name" />
         </div>
 
         <div class="form-control">
