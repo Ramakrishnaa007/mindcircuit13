@@ -1,5 +1,5 @@
 pipeline {
-    agent slave1
+    agent slave1,
 
     stages {
         stage('CLONE SCM') {
