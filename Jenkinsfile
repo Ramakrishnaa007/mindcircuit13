@@ -17,7 +17,7 @@ pipeline {
 		stage('DEPLOY TO TOMCAT') {
             steps {
                 echo 'Code deployment to tomcat'
-				deploy adapters: [tomcat9(credentialsId: 'tomcat-credentials', path: '', url: 'http://100.26.252.72:8081/')], contextPath: 'facebook-app', war: '**/*.war'
+				deploy adapters: [tomcat9(credentialsId: 'tomcat-credentials', path: '', url: 'http://ec2-107-23-97-34.compute-1.amazonaws.com:8090/')], contextPath: 'rk-job', war: '**/*.war'
             }
         }
     }
