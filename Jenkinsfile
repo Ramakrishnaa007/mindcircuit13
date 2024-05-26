@@ -16,7 +16,7 @@ pipeline {
 		
 		stage('SONARQUBE ANALYSIS') {
             steps {
-                echo 'code inspection of  GAME OF LIFE project code'
+                echo 'code inspection of  GOOGLE PAGE project code'
 			    sh 'mvn clean compile sonar:sonar'
 			    
             }
