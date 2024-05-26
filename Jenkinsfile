@@ -9,12 +9,12 @@ pipeline {
     stages {
         stage('CLONE SCM') {
             steps {
-                echo 'Cloning GAME OF LIFE project code'
+                echo 'Cloning GOOGLE HOME PAGE project code'
 				git branch: 'main', url: 'https://github.com/Ramakrishnaa007/ramakrishna-mindcircuit13.git'
             }
         }
 		
-		stage('SONARqube ANALYSIS') {
+		stage('SONARQUBE ANALYSIS') {
             steps {
                 echo 'code inspection of  GAME OF LIFE project code'
 			    sh 'mvn clean compile sonar:sonar'
@@ -33,7 +33,7 @@ pipeline {
 		stage('Deploy to tomcat') {
             steps {
                 echo 'Deploying artifact to tomcat webserver '
-				deploy adapters: [tomcat9(credentialsId: 'tomcat-credentials', path: '', url: 'http://ec2-100-26-253-111.compute-1.amazonaws.com:8081/')], contextPath: 'game of life', war: '**/*.war'
+				deploy adapters: [tomcat9(credentialsId: 'tomcat-credentials', path: '', url: 'http://52.87.153.78:8081/')], contextPath: 'gameoflife', war: '**/*.war'
             }
         }
     }
