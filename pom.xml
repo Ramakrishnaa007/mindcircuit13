@@ -16,12 +16,12 @@
 
 	<distributionManagement>
 		 <snapshotRepository>
-		    <id>nexusRepo</id>
+		    <id>NexusRepo</id>
 		    <url>http://54.210.59.234:8081/repository/rk-snapshot/</url>
 		 </snapshotRepository>
 
 		<repository>
-		    <id>nexusRepo</id>
+		    <id>NexusRepo</id>
 		    <url>http://54.210.59.234:8081/repository/rk-release/</url>
 		</repository>
   	</distributionManagement>
