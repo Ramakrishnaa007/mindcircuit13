@@ -2,33 +2,43 @@ pipeline {
     agent any
 	
 	tools {
-    jdk 'JAVA1.8'
+    jdk 'java 1.8'
 
   }
 
     stages {
         stage('CLONE SCM') {
             steps {
-                echo 'cloning code from Github'
-				git branch: 'main', url: 'https://github.com/devopstraininghub/webapp1.git'
+                echo 'Cloning GOOGLE HOME PAGE project code'
+				git branch: 'main', url: 'https://github.com/Ramakrishnaa007/ramakrishna-greeksurvey.git'
             }
         }
 		
-
-		
-			
-		stage('Build Artifact') {
+		stage('SONARQUBE ANALYSIS') {
             steps {
-                echo 'Build Artifact with maven build tool'
-				sh 'mvn clean sonar:sonar deploy'
+                echo 'code inspection of  GOOGLE PAGE project code'
+			     sh 'mvn clean sonar:sonar '
             }
         }
 		
 		
-		stage('Deploy') {
+		stage('Build Artifact ') {
             steps {
-                echo 'Deploy to tomcat ap/n server '
-				deploy adapters: [tomcat9(credentialsId: 'tomcat', path: '', url: 'http://34.224.5.225:8081/')], contextPath: 'b12book', war: '**/*.war'
+                echo 'generating artifact with maven build tool'
+				sh 'mvn  install'
+            }
+        }
+        
+		stage('Publish to nexus') {
+            steps {
+                echo 'publishinig to nexus repository'
+				sh 'mvn  deploy'
+            }
+        }
+		stage('Deploy to tomcat') {
+            steps {
+                echo 'Deploying artifact to tomcat webserver '
+				deploy adapters: [tomcat9(credentialsId: 'tomcat-credentials', path: '', url: 'http://54.90.184.76:8090/')], contextPath: 'greeksurvey', war: '**/*.war'
             }
         }
     }
