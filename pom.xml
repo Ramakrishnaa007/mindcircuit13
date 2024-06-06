@@ -16,16 +16,17 @@
 
 	<distributionManagement>
 		 <snapshotRepository>
-		    <id>NexusRepo</id>
-		    <url>http://100.25.155.112:8081/repository/mc-snapshot/</url>
+		    <id>nexusRepo</id>
+		    <url>http://54.210.59.234:8081/repository/rk-snapshot/</url>
+		    <url>http://54.210.59.234:8081/repository/rk-release/</url>
 		 </snapshotRepository>
-		
+
 		<repository>
-		    <id>NexusRepo</id>
-		    <url>http://100.25.155.112:8081/repository/mc-release/</url>
+		    <id>nexusRepo</id>
+		    <url>http://54.210.59.234:8081/repository/rk-snapshot/</url>
+		    <url>http://54.210.59.234:8081/repository/rk-release/</url>
 		</repository>
   	</distributionManagement>
-
     
     <build>
         <plugins>
