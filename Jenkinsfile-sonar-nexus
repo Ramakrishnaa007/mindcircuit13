@@ -1,38 +1,44 @@
 pipeline {
     agent any
-
+	
 	tools {
-    jdk 'JAVA1.8'
+    jdk 'java 11.0'
 
   }
 
     stages {
         stage('CLONE SCM') {
             steps {
-                echo 'cloning code from Github'
-				git branch: 'main', url: 'https://github.com/devopstraininghub/webapp1.git'
+                echo 'Cloning Greeksurvey PAGE project code'
+				git branch: 'main', url: 'https://github.com/Ramakrishnaa007/ramakrishna-greeksurvey.git'
             }
         }
-			
+		
 		stage('SONARQUBE ANALYSIS') {
             steps {
-                echo 'SONARQUBE ANALYSIS'
-				sh 'mvn clean sonar:sonar'
+                echo 'code inspection of  Greeksurvey project code'
+			     sh 'mvn clean sonar:sonar '
             }
         }
 		
 		
-		stage('Build Artifact AND PUSHING TO NEXUS') {
+		stage('Build Artifact ') {
             steps {
-                echo 'Build Artifact with maven build tool'
-				sh 'mvn clean deploy'
+                echo 'generating artifact with maven build tool'
+				sh 'mvn  install'
             }
         }
-		
-		stage('Deploy') {
+        
+		stage('Publish to nexus') {
             steps {
-                echo 'Deploy to tomcat ap/n server '
-				deploy adapters: [tomcat9(credentialsId: 'tomcat', path: '', url: 'http://3.83.227.87:8081/')], contextPath: 'facebook', war: '**/*.war'
+                echo 'publishinig to nexus repository'
+				sh 'mvn  deploy'
+            }
+        }
+		stage('Deploy to tomcat') {
+            steps {
+                echo 'Deploying artifact to tomcat webserver '
+	deploy adapters: [tomcat9(credentialsId: 'tomcat-credentials', path: '', url: 'http://18.210.18.66:8090/')], contextPath: 'greeksurvey', war: '**/*.war'
             }
         }
     }
